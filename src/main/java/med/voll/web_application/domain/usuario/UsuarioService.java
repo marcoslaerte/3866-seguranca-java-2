@@ -66,6 +66,8 @@ public class UsuarioService implements UserDetailsService {
         usuario.setToken(token);
         usuario.setExpiracaoToken(LocalDateTime.now().plusMinutes(15));
 
+        usuarioRepository.save(usuario);
+
     }
 
 }
