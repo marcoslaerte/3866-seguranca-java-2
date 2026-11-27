@@ -34,9 +34,10 @@ public class UsuarioService implements UserDetailsService {
 
     public Long salvarUsuario(String nome, String email, Perfil perfil) {
         String primeiraSenha = UUID.randomUUID().toString().substring(0, 8);
-        System.out.println("Senha gerada: " + primeiraSenha);
+        //System.out.println("Senha gerada: " + primeiraSenha);
         String senhaCriptografada = encriptador.encode(primeiraSenha);
         Usuario usuario = usuarioRepository.save(new Usuario(nome, email, senhaCriptografada, perfil));
+        emailService.enviarEmailSenhaAleatoria(usuario, primeiraSenha);
         return usuario.getId();
     }
 
